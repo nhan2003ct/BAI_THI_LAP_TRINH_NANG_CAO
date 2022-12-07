@@ -64,7 +64,7 @@ void writefile()
     {
         printf("FILE DEO TON TAI KIEM TRA LAI"); exit(1);
     }
-    while (fread(&a[n],1,sizeof(a[n]),Fin))
+    while (fread(&a[n],1,sizeof(int),Fin))
     {
         printf("%8d",a[n]);
         n++;
@@ -73,17 +73,23 @@ void writefile()
     for(int i=0;i<num;i++)
     {
        printf("nhap so thu b[%d]",i);scanf("%d",&a[i]);
-       fwrite(&a[i],1,sizeof(a[i]),Fout);
+       fwrite(&a[i],1,sizeof(int),Fout);
     }
     fclose(Fin);
     fclose(Fout);
+}
+
+void writefile2()
+{
+    FILE *Fin,*Fout;
+    int a[100],num = 0, n = 0;
     if(((Fin = fopen(input2,"rb")) == NULL) || ((Fout = fopen(input2,"ab")) == NULL))
     {
         printf("FILE DEO TON TAI KIEM TRA LAI"); exit(1);
     }
-    while(fread(&a[n],1,sizeof(a[n]),Fin))
+    while(fread(&a[n],1,sizeof(int),Fin))
     {
-        printf("%8d",a[n]);
+        printf("%8d\n",a[n]);
         n++;
     }
     printf("\nfile co %d so \n",n);
@@ -91,17 +97,18 @@ void writefile()
     printf("file sao khi sap xep \n");
     for(int i=0;i<n;i++)
     {
-        printf("%8d",a[i]);
+        printf("%8d\n",a[i]);
         fwrite(&a[i],1,sizeof(int),Fout);
     }
     fclose(Fin);
     fclose(Fout);   
 }
-
 int main()
 {
     readfile();
     system("pause");
     writefile();
+    writefile2();
     return 0;
 }
+
